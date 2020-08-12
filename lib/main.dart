@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:nlw_flutter/http/webclients/musify_webclient.dart';
+import 'package:nlw_flutter/routes/routes.dart';
 import 'package:nlw_flutter/theme/theme.dart';
+import 'package:nlw_flutter/widgets/app_dependencies.dart';
+
+import 'theme/theme.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MusifyApp(
+    musifyWebClient: MusifyWebClient(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
+class MusifyApp extends StatelessWidget {
+  final MusifyWebClient musifyWebClient;
+
+  MusifyApp({
+    @required this.musifyWebClient,
+  });
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: appTheme(),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    return AppDependencies(
+      musifyWebClient: musifyWebClient,
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: appTheme(),
+        home: MyHomePage(title: 'Flutter Demo Home Page'),
+      ),
     );
   }
 }
@@ -39,117 +54,11 @@ class _MyHomePageState extends State<MyHomePage> {
   final int connections = 0;
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Image.asset('images/logo.png', fit: BoxFit.contain, height: 18,)
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-                  child: Text(
-                    'Aprenda a tocar online',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w100
-                    ),
-                  ),
-                  padding: EdgeInsets.all(8),
-                ),
-            Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Image.asset('images/landing.png', fit: BoxFit.fitWidth,),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: Image.asset('images/icons/study.png',fit: BoxFit.scaleDown, height: 16,),
-                        ),
-                        Text(
-                          'Aprender', 
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontFamily: 'Archivo',
-                          ),
-                        ),
-                      ],
-                    ),
-                    onPressed: () => {
-                  }),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                    color: Colors.grey[600],
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: Image.asset(
-                            'images/icons/give-classes.png',
-                            fit: BoxFit.scaleDown, 
-                            height: 16,
-                          ),
-                        ),
-                        Text(
-                          'Dar aulas',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontFamily: 'Archivo',
-                          ),
-                        ),
-                      ],
-                    ),
-                    onPressed: () => {
-                  }),
-                ),
-              ],
-            ),
-            Container(
-                  child: Text(
-                    'Total de $connections conexões já realizadas', 
-                    style: TextStyle(color: appTheme().primaryColor),
-                  ),
-                  padding: EdgeInsets.all(8),
-                ),
-          ],
-        ),
-      ),
+    return MaterialApp(
+      initialRoute: '/',
+      routes: routeList(),
+      theme: appTheme(),
+      darkTheme: darkTheme(),
     );
   }
 }

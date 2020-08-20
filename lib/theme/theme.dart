@@ -6,6 +6,8 @@ ThemeData appTheme() {
       backgroundColor: Color(0xff000000),
       scaffoldBackgroundColor: Color(0xff000000),
       primaryColor: Color(0xff1db954),
+      primaryColorDark: Color(0xff137736),
+      primaryColorLight: Color(0xff36E071),
       accentColor: Color(0xff137736),
       textTheme: TextTheme(
           bodyText2: TextStyle(

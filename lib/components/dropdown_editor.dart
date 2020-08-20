@@ -2,20 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:nlw_flutter/theme/theme.dart';
 
 class DropdownEditor extends StatefulWidget {
+  final itens;
+  final hintText;
+  final ValueChanged<void> dropdownSelectedItem;
+
+  const DropdownEditor(
+      {@required this.itens,
+      @required this.dropdownSelectedItem,
+      @required this.hintText});
+
   @override
   _DropdownEditorState createState() => _DropdownEditorState();
 }
 
 class _DropdownEditorState extends State<DropdownEditor> {
-  String dropdownValue = 'One';
+  String ddValue;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: DropdownButton<String>(
+        hint: Text(
+          widget.hintText,
+          style: TextStyle(color: Colors.white),
+        ),
+        value: ddValue,
         isExpanded: true,
         dropdownColor: appTheme().backgroundColor,
-        value: dropdownValue,
         icon: Icon(
           Icons.arrow_downward,
           color: appTheme().accentColor,
@@ -30,12 +43,13 @@ class _DropdownEditorState extends State<DropdownEditor> {
           color: appTheme().accentColor,
         ),
         onChanged: (String newValue) {
+          widget.dropdownSelectedItem(newValue);
           setState(() {
-            dropdownValue = newValue;
+            ddValue = newValue;
+            return newValue;
           });
         },
-        items: <String>['One', 'Two', 'Free', 'Four']
-            .map<DropdownMenuItem<String>>((String value) {
+        items: widget.itens.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(value),

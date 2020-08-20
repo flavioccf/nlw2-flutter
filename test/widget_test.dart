@@ -7,13 +7,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:nlw_flutter/http/webclients/musify_webclient.dart';
 
 import 'package:nlw_flutter/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MusifyApp());
+    await tester.pumpWidget(MusifyApp(
+      musifyWebClient: MusifyWebClient(),
+    ));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

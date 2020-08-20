@@ -17,6 +17,7 @@ dependencies:
   http_interceptor: ^0.3.1
   path:
   flutter_open_whatsapp: ^0.1.2
+  sliding_up_panel: ^1.0.2
 
   cupertino_icons: ^0.1.3
 

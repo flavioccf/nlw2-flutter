@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nlw_flutter/theme/theme.dart';
 
 class Editor extends StatelessWidget {
   final TextEditingController _controller;
